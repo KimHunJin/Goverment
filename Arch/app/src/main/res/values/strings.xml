@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Architecture</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="strAddress">주소</string>
+    <string name="strCurrentposition">현재위치</string>
+    <string name="strStreetAddress">도로주소명</string>
+    <string name="strDirectionValue">방향 값</string>
+
+</resources>

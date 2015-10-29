@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">ArchBiz2015</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="strAddress">주소</string>
+    <string name="strCurrentposition">현재위치</string>
+    <string name="strStreetAddress">도로주소명</string>
+    <string name="strDirectionValue">방향 값</string>
+    <string name="strBuilderName">건물 명</string>
+    <string name="strBuilderAddress">건물 주소</string>
+    <string name="strBuilderContent">건물 내용</string>
+    <string name="strMarket">상권 분석</string>
+</resources>
