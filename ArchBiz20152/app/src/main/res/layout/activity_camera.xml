@@ -1,0 +1,86 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginBottom="5dp"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/main_image_dial"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_centerInParent="true"
+                android:contentDescription="@string/compass_dial"
+                android:src="@drawable/dial"
+                android:layout_gravity="center"/>
+
+            <ImageView
+                android:id="@+id/main_image_hands"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerInParent="true"
+                android:contentDescription="@string/compass_hands"
+                android:scaleType="fitXY"
+                android:src="@drawable/hands" />
+        </RelativeLayout>
+
+        <com.sku.archbiz2015.utils.SquaredFrameLayout
+            android:id="@+id/vPhotoRoot"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <com.commonsware.cwac.camera.CameraView
+                android:id="@+id/cameraView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical" />
+
+            <ImageButton
+                android:id="@+id/ivTakenPhoto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:scaleType="centerCrop"
+                android:visibility="gone" />
+
+            <View
+                android:id="@+id/vShutter"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#ffffff"
+                android:visibility="gone" />
+
+
+        </com.sku.archbiz2015.utils.SquaredFrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/btnTakePhoto"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/btn_capture" />
+            </FrameLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+
+</FrameLayout>

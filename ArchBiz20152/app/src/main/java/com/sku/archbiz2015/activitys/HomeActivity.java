@@ -49,7 +49,8 @@ public class HomeActivity extends AppCompatActivity {
         liCamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),"차후 예정 입니다.", Toast.LENGTH_SHORT).show();
+                Intent it = new Intent(getApplication(),CameraActivity.class);
+                startActivity(it);
             }
         });
 

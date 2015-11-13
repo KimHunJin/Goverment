@@ -12,4 +12,8 @@
     <string name="strBuilderContent">건물 내용</string>
     <string name="strMarket">상권 분석</string>
     <string name="title_activity_home">HomeActivity</string>
+    <string name="title_activity_camera">CameraActivity</string>
+
+    <string name="compass_dial">Compass Dial</string>
+    <string name="compass_hands">Compass Hands</string>
 </resources>

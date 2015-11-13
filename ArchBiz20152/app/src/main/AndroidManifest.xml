@@ -27,9 +27,8 @@
         android:label="@string/app_name"
         android:theme="@style/ToolBarTheme" >
         <activity
-
             android:name=".activitys.HomeActivity"
-            android:label="@string/title_activity_home">
+            android:label="@string/title_activity_home" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -42,10 +41,9 @@
         <activity
             android:name=".activitys.GirdViewActivity"
             android:label="GridView" />
-
         <activity
             android:name=".activitys.MapSensorActivity"
-            android:label="Main">
+            android:label="Main" >
         </activity>
 
         <meta-data
@@ -55,7 +53,10 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-
+        <activity
+            android:name=".activitys.CameraActivity"
+            android:label="@string/title_activity_camera" >
+        </activity>
     </application>
 
 </manifest>
