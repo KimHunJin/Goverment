@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+
     <color name="red_23">#ffec2133</color>
     <color name="red_pink_24">#ffe09280</color>
     <color name="red_pink_26">#ffec70b9</color>
@@ -11,5 +15,8 @@
     <color name="shadowends">#7f000000</color>
     <color name="field_color">#a45dafcf</color>
 
+    <color name="primary_text">#212121</color>
+    <color name="secondary_text">#727272</color>
+    <color name="secondary_text_transparent_70">#B3727272</color>
 
 </resources>

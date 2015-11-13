@@ -1,9 +1,7 @@
-package com.sku.archbiz2015;
+package com.sku.archbiz2015.activitys;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Point;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -11,20 +9,12 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.location.Address;
 import android.location.Geocoder;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -32,23 +22,20 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.MapsInitializer;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.sku.archbiz2015.R;
 import com.sku.archbiz2015.item.SensorItem;
-import com.sku.archbiz2015.utils.GPSListenerBackUp;
 import com.sku.archbiz2015.utils.GpsInfo;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
-public class MainActivity extends FragmentActivity implements GoogleMap.OnMapClickListener {
+public class MapSensorActivity extends FragmentActivity implements GoogleMap.OnMapClickListener {
 
-    TextView txtAddress, txtDirectionValue; //방향 값 텍스트뷰
-    Button btnPosition; //현재위치 버튼
+    TextView txtDirectionValue; //방향 값 텍스트뷰
     GoogleMap map;  //구글맵
     SensorItem sensorItem;
     long startTime;
@@ -57,17 +44,15 @@ public class MainActivity extends FragmentActivity implements GoogleMap.OnMapCli
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        txtAddress = (TextView) findViewById(R.id.txtAddress);
-        txtDirectionValue = (TextView) findViewById(R.id.txtDirectionValue);
-        btnPosition = (Button) findViewById(R.id.btnPosition);
+
 
         MapsInitializer.initialize(getApplicationContext());
 
         init();
 
-
         //현재위치 버튼 클릭시 구글맵 나옴
-        btnPosition.setOnClickListener(new View.OnClickListener() {
+        RelativeLayout reHere = (RelativeLayout)findViewById(R.id.hereLayout);
+        reHere.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 init();
@@ -85,10 +70,11 @@ public class MainActivity extends FragmentActivity implements GoogleMap.OnMapCli
     }
 
     private void init() {
-        GooglePlayServicesUtil.isGooglePlayServicesAvailable(MainActivity.this);
+        GooglePlayServicesUtil.isGooglePlayServicesAvailable(MapSensorActivity.this);
         map = ((MapFragment) getFragmentManager().findFragmentById(R.id.mapFrist)).getMap();
+        map.clear();
 
-        GpsInfo gps = new GpsInfo(MainActivity.this);
+        GpsInfo gps = new GpsInfo(MapSensorActivity.this);
         if(gps.isGetLocation()) {
             Log.e("isGpsLocation", "isGpsLocaion is true");
             double latitude = gps.getLatitude();
@@ -108,7 +94,7 @@ public class MainActivity extends FragmentActivity implements GoogleMap.OnMapCli
                 @Override
                 public void onMapClick(LatLng point) {
                     map.clear();
-                    Log.e("map", "map click");
+                    Log.e("map", point.latitude + "  " + point.longitude);
                     clickLatLng[0] = new LatLng(point.latitude,point.longitude);
                     MarkerOptions marker = new MarkerOptions();
                     marker.position(point);
@@ -151,12 +137,10 @@ public class MainActivity extends FragmentActivity implements GoogleMap.OnMapCli
         SensorManager sensorManager;
         Sensor sensor;
         Context context;
-        TextView txtDirectionValue;
 
         public DirectionListener(Context context, TextView txtDirectionValue)
         {
             this.context = context;
-            this.txtDirectionValue = txtDirectionValue;
             sensorManager = (SensorManager)context.getSystemService(Context.SENSOR_SERVICE);
             sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
         }
@@ -169,7 +153,6 @@ public class MainActivity extends FragmentActivity implements GoogleMap.OnMapCli
         public void onListenerUnregister()
         {
             sensorManager.unregisterListener(this);
-            txtDirectionValue.setText("전송완료");
         }
 
 
@@ -183,7 +166,6 @@ public class MainActivity extends FragmentActivity implements GoogleMap.OnMapCli
                     long currTime = System.currentTimeMillis();
                     if(currTime-startTime<2000 || currTime-startTime<1500)
                     {
-                        txtDirectionValue.setText("전송");
 
                         onListenerUnregister();
                     }
@@ -195,9 +177,6 @@ public class MainActivity extends FragmentActivity implements GoogleMap.OnMapCli
                 sensorItem.setPitch("" + event.values[1]);
                 sensorItem.setRoll("" + event.values[2]);
 
-//                txtDirectionValue.setText("Azimuth : " + event.values[0] + ", Pitch : " + event.values[1]
-//                        + ", Roll : " + event.values[2]);
-//                Log.i("sensor", sensorItem.getAzimuth());
             }
 
             currAzimuth = Double.parseDouble(sensorItem.getAzimuth());

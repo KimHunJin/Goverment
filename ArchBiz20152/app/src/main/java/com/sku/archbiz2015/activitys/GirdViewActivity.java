@@ -1,16 +1,17 @@
-package com.sku.archbiz2015;
+package com.sku.archbiz2015.activitys;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.GridView;
 
+import com.sku.archbiz2015.R;
 import com.sku.archbiz2015.adapter.GridViewAdapter;
 import com.sku.archbiz2015.item.GridViewItem;
 
 import java.util.ArrayList;
 
 
-public class GirdViewTest extends AppCompatActivity {
+public class GirdViewActivity extends AppCompatActivity {
     ArrayList<GridViewItem> gridArrayList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

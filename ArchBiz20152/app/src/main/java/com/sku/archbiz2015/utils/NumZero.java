@@ -1,4 +1,4 @@
-package com.sku.archbiz2015.modules;
+package com.sku.archbiz2015.utils;
 
 import android.content.Context;
 import android.widget.TextView;

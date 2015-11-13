@@ -11,4 +11,5 @@
     <string name="strBuilderAddress">건물 주소</string>
     <string name="strBuilderContent">건물 내용</string>
     <string name="strMarket">상권 분석</string>
+    <string name="title_activity_home">HomeActivity</string>
 </resources>
