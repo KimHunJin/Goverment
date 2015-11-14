@@ -14,6 +14,7 @@ import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -45,6 +46,13 @@ public class MapSensorActivity extends FragmentActivity implements GoogleMap.OnM
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        ImageView imgToolBack = (ImageView)findViewById(R.id.img_tool_back);
+        imgToolBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         MapsInitializer.initialize(getApplicationContext());
 
@@ -106,7 +114,6 @@ public class MapSensorActivity extends FragmentActivity implements GoogleMap.OnM
             map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                 @Override
                 public boolean onMarkerClick(Marker marker) {
-                    startSensorService();
 
                     Intent it = new Intent(getApplication(),SecondPageActivity.class);
                     it.putExtra("Latitude", clickLatLng[0].latitude);

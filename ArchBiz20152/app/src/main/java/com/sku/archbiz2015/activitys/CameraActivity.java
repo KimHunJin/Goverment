@@ -1,6 +1,5 @@
 package com.sku.archbiz2015.activitys;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -12,7 +11,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -24,6 +22,7 @@ import com.commonsware.cwac.camera.PictureTransaction;
 import com.commonsware.cwac.camera.SimpleCameraHost;
 import com.sku.archbiz2015.R;
 import com.sku.archbiz2015.item.Compass;
+import com.sku.archbiz2015.utils.GpsInfo;
 import com.sku.archbiz2015.utils.SquaredFrameLayout;
 import com.sku.archbiz2015.view.RevealBackgroundView;
 
@@ -42,7 +41,6 @@ public class CameraActivity extends AppCompatActivity implements RevealBackgroun
 
     private Compass compass;
     private CameraView cameraView;
-    private SquaredFrameLayout vPhotoRoot;
     private ImageButton ivTakenPhoto;
     Button btnTakePhoto;
 
@@ -51,15 +49,28 @@ public class CameraActivity extends AppCompatActivity implements RevealBackgroun
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
 
+        final GpsInfo gps = new GpsInfo(CameraActivity.this);
+        if(!gps.isGetLocation()) {
+            gps.showSettingsAlert();
+        }
+
         compass = new Compass(this);
         compass.arrowView = (ImageView) findViewById(R.id.main_image_hands);
 
-
-
         cameraView = (CameraView)findViewById(R.id.cameraView);
-        vPhotoRoot = (SquaredFrameLayout)findViewById(R.id.vPhotoRoot);
         btnTakePhoto = (Button)findViewById(R.id.btnTakePhoto);
         ivTakenPhoto = (ImageButton)findViewById(R.id.ivTakenPhoto);
+
+        btnTakePhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent(getApplication(),SecondPageActivity.class);
+                it.putExtra("Latitude", gps.getLatitude());
+                it.putExtra("Longitude", gps.getLongitude());
+                startActivity(it);
+                finish();
+            }
+        });
     }
 
     @Override

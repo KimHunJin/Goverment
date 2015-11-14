@@ -58,7 +58,7 @@ public class HomeActivity extends AppCompatActivity {
         liHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Toast.makeText(getApplicationContext(),"준비 중 입니다.",Toast.LENGTH_SHORT).show();
             }
         });
     }
