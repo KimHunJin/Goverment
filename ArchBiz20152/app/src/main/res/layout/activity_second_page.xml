@@ -9,94 +9,6 @@
 
     <include layout="@layout/search_toolbar"></include>
 
-    <RelativeLayout
-        android:id="@+id/sliderframe"
-        android:layout_width="match_parent"
-        android:layout_height="200dp">
-
-        <fragment
-            android:id="@+id/mapSecond"
-            android:name="com.google.android.gms.maps.MapFragment"
-            class="com.google.android.gms.maps.MapFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <RelativeLayout
-            android:id="@+id/relativeImgShow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginRight="3dp"
-            android:layout_marginTop="3dp"
-            android:background="#88eeeeee">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_filter_black_24dp" />
-
-
-        </RelativeLayout>
-
-
-        <com.hkm.slider.SliderLayout
-            android:id="@+id/slider"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="invisible"
-            custom:auto_cycle="true"
-            custom:image_button_l="@drawable/myarrowl"
-            custom:indicator_visibility="visible"
-            custom:lns_use_presentation="Smart"
-            custom:pager_animation="Accordion"
-            custom:pager_animation_span="1100"
-            custom:slider_side_buttons="false" />
-
-
-        <com.hkm.slider.Indicators.PagerIndicator
-            android:id="@+id/custom_indicator2"
-            style="@style/AndroidImageSlider_Corner_Oval_Orange"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="20dp" />
-
-        <RelativeLayout
-            android:id="@+id/relativeMapShow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginRight="3dp"
-            android:layout_marginTop="3dp"
-            android:background="#88eeeeee"
-            android:visibility="invisible">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_reply_black_24dp" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/relativePicture"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginBottom="3dp"
-            android:layout_marginRight="3dp"
-            android:background="#88eeeeee">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_camera_alt_black_24dp" />
-        </RelativeLayout>
-
-
-    </RelativeLayout>
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -107,11 +19,100 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <RelativeLayout
+                android:id="@+id/sliderframe"
+                android:layout_width="match_parent"
+                android:layout_height="200dp">
+
+                <fragment
+                    android:id="@+id/mapSecond"
+                    android:name="com.google.android.gms.maps.MapFragment"
+                    class="com.google.android.gms.maps.MapFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <RelativeLayout
+                    android:id="@+id/relativeImgShow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginRight="3dp"
+                    android:layout_marginTop="3dp"
+                    android:background="#88eeeeee">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_filter_black_24dp" />
+
+
+                </RelativeLayout>
+
+
+                <com.hkm.slider.SliderLayout
+                    android:id="@+id/slider"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="invisible"
+                    custom:auto_cycle="true"
+                    custom:image_button_l="@drawable/myarrowl"
+                    custom:indicator_visibility="visible"
+                    custom:lns_use_presentation="Smart"
+                    custom:pager_animation="Accordion"
+                    custom:pager_animation_span="1100"
+                    custom:slider_side_buttons="false" />
+
+
+                <com.hkm.slider.Indicators.PagerIndicator
+                    android:id="@+id/custom_indicator2"
+                    style="@style/AndroidImageSlider_Corner_Oval_Orange"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="20dp" />
+
+                <RelativeLayout
+                    android:id="@+id/relativeMapShow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginRight="3dp"
+                    android:layout_marginTop="3dp"
+                    android:background="#88eeeeee"
+                    android:visibility="invisible">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_reply_black_24dp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/relativePicture"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginBottom="3dp"
+                    android:layout_marginRight="3dp"
+                    android:background="#88eeeeee">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_camera_alt_black_24dp" />
+                </RelativeLayout>
+
+
+            </RelativeLayout>
+
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="72dp"
-                android:orientation="horizontal"
-                android:background="#e57373">
+                android:background="#e57373"
+                android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/btnValue1"
@@ -119,36 +120,39 @@
                     android:layout_height="match_parent"
                     android:layout_margin="2dp"
                     android:layout_weight="0.25"
-                    android:textSize="24dp"
+                    android:background="@drawable/roundedbutton"
                     android:textColor="#eeeeee"
-                    android:background="@drawable/roundedbutton" />
+                    android:textSize="24dp" />
+
                 <Button
                     android:id="@+id/btnValue2"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_margin="2dp"
                     android:layout_weight="0.25"
-                    android:textSize="24dp"
+                    android:background="@drawable/roundedbutton"
                     android:textColor="#eeeeee"
-                    android:background="@drawable/roundedbutton" />
+                    android:textSize="24dp" />
+
                 <Button
                     android:id="@+id/btnValue3"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_margin="2dp"
                     android:layout_weight="0.25"
-                    android:textSize="24dp"
+                    android:background="@drawable/roundedbutton"
                     android:textColor="#eeeeee"
-                    android:background="@drawable/roundedbutton" />
+                    android:textSize="24dp" />
+
                 <Button
                     android:id="@+id/btnValue4"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_margin="2dp"
                     android:layout_weight="0.25"
-                    android:textSize="24dp"
+                    android:background="@drawable/roundedbutton"
                     android:textColor="#eeeeee"
-                    android:background="@drawable/roundedbutton" />
+                    android:textSize="24dp" />
 
             </LinearLayout>
 
@@ -179,12 +183,12 @@
                         android:padding="16dp">
 
 
-                        <ImageView
+                        <com.sku.archbiz2015.utils.RoundImageView
                             android:id="@+id/buildingImage1"
                             android:layout_width="88dp"
                             android:layout_height="88dp"
                             android:layout_marginRight="16dp"
-                            android:background="#eeeeee" />
+                            android:src="@drawable/kfc" />
 
                         <EditText
                             android:id="@+id/buildingText1"
@@ -196,6 +200,7 @@
                             android:gravity="top"
                             android:lines="3"
                             android:padding="8dp"
+                            android:text="KFC"
                             android:textColor="#333333"
                             android:textSize="14sp" />
                     </LinearLayout>
@@ -217,12 +222,12 @@
                         android:layout_height="wrap_content"
                         android:padding="16dp">
 
-                        <ImageView
+                        <com.sku.archbiz2015.utils.RoundImageView
                             android:id="@+id/buildingImage2"
                             android:layout_width="88dp"
                             android:layout_height="88dp"
                             android:layout_marginRight="16dp"
-                            android:background="#eeeeee" />
+                            android:src="@drawable/parisbaguette" />
 
                         <EditText
                             android:id="@+id/buildingText2"
@@ -234,9 +239,11 @@
                             android:gravity="top"
                             android:lines="3"
                             android:padding="8dp"
+                            android:text="Paris Baguette"
                             android:textColor="#333333"
                             android:textSize="14sp" />
                     </LinearLayout>
+
 
                     <View
                         android:layout_width="match_parent"
@@ -244,12 +251,25 @@
                         android:layout_gravity="center_vertical"
                         android:background="#eeeeee" />
 
-                    <ImageView
-                        android:id="@+id/btnMoreBuilding"
+                    <LinearLayout
+                        android:id="@+id/linearMoreBuilding"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="right"
-                        android:src="@drawable/ic_details_black_18dp" />
+                        android:orientation="horizontal"
+                        android:layout_gravity="right">
+
+                        <TextView
+                            android:text="더보기"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="4dp"/>
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_details_black_18dp" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -275,21 +295,23 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <ImageView
+                        <com.sku.archbiz2015.utils.RoundImageView
                             android:layout_width="72dp"
                             android:layout_height="72dp"
-                            android:background="#eeeeee" />
+                            android:background="#eeeeee"
+                            android:src="@drawable/parisbaguette" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
                             android:orientation="vertical">
 
                             <TextView
                                 android:id="@+id/txtBuildingSubject"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="제목"
+                                android:text="파리바게트"
                                 android:textColor="#000000"
                                 android:textSize="24dp" />
 
@@ -297,7 +319,7 @@
                                 android:id="@+id/txtBuildingLink"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="링크"
+                                android:text="https://www.paris.co.kr/"
                                 android:textColor="#00a3ff"
                                 android:textSize="16dp" />
 
@@ -401,12 +423,28 @@
                         android:layout_gravity="center_vertical"
                         android:background="#eeeeee" />
 
-                    <ImageView
-                        android:id="@+id/btnMoreInvest"
+                    <LinearLayout
+                        android:id="@+id/linearMoreInvest"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="right"
-                        android:src="@drawable/ic_details_black_18dp" />
+                        android:orientation="horizontal"
+                        android:layout_gravity="right">
+
+                        <TextView
+                            android:text="더보기"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="4dp"/>
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_details_black_18dp" />
+
+                    </LinearLayout>
+
+
+
 
                 </LinearLayout>
 
@@ -558,12 +596,25 @@
                         android:layout_gravity="center_vertical"
                         android:background="#eeeeee" />
 
-                    <ImageView
-                        android:id="@+id/btnMoreAd"
+                    <LinearLayout
+                        android:id="@+id/linearMoreAd"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="right"
-                        android:src="@drawable/ic_details_black_18dp" />
+                        android:orientation="horizontal"
+                        android:layout_gravity="right">
+
+                        <TextView
+                            android:text="더보기"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="4dp"/>
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_details_black_18dp" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -631,5 +682,5 @@
 
         </LinearLayout>
     </ScrollView>
-
 </LinearLayout>
+

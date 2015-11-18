@@ -1,8 +1,10 @@
 package com.sku.archbiz2015.activitys;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -10,10 +12,22 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.sku.archbiz2015.R;
+import com.sku.archbiz2015.network.Network;
 import com.sku.archbiz2015.utils.GpsInfo;
+
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
 
+
+    private static final double VALUE = 0.0001;
+    double latitude, longitude;
+    ArrayList<Double> arrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,10 +43,17 @@ public class HomeActivity extends AppCompatActivity {
         liNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent it = new Intent(getApplication(), SecondPageActivity.class);
-                it.putExtra("Latitude", gps.getLatitude());
-                it.putExtra("Longitude", gps.getLongitude());
-                startActivity(it);
+                latitude = gps.getLatitude();
+                longitude = gps.getLongitude();
+
+                // 현재 위치를 계산
+                new Network(HomeActivity.this).execute(1,latitude,longitude, VALUE);
+
+/*                Intent it = new Intent(getApplication(), SecondPageActivity.class);
+                it.putExtra("Latitude", latitude);
+                it.putExtra("Longitude", longitude);
+                it.putExtra("value",VALUE);
+                startActivity(it);*/
             }
         });
 
@@ -61,28 +82,5 @@ public class HomeActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),"준비 중 입니다.",Toast.LENGTH_SHORT).show();
             }
         });
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_home, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 }

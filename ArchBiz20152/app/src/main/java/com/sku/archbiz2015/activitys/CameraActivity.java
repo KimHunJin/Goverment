@@ -22,6 +22,7 @@ import com.commonsware.cwac.camera.PictureTransaction;
 import com.commonsware.cwac.camera.SimpleCameraHost;
 import com.sku.archbiz2015.R;
 import com.sku.archbiz2015.item.Compass;
+import com.sku.archbiz2015.network.Network;
 import com.sku.archbiz2015.utils.GpsInfo;
 import com.sku.archbiz2015.utils.SquaredFrameLayout;
 import com.sku.archbiz2015.view.RevealBackgroundView;
@@ -31,6 +32,7 @@ import java.io.File;
 public class CameraActivity extends AppCompatActivity implements RevealBackgroundView.OnStateChangeListener,
         CameraHostProvider {
 
+    private static final double VALUE= 0.0001;
 
     private static final int STATE_TAKE_PHOTO = 0;
     private static final int STATE_SETUP_PHOTO = 1;
@@ -64,11 +66,11 @@ public class CameraActivity extends AppCompatActivity implements RevealBackgroun
         btnTakePhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent it = new Intent(getApplication(),SecondPageActivity.class);
+                new Network(CameraActivity.this).execute(1,gps.getLatitude(),gps.getLongitude(), VALUE);
+/*                Intent it = new Intent(getApplication(),SecondPageActivity.class);
                 it.putExtra("Latitude", gps.getLatitude());
                 it.putExtra("Longitude", gps.getLongitude());
-                startActivity(it);
-                finish();
+                startActivity(it);*/
             }
         });
     }

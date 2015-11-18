@@ -59,6 +59,7 @@ public class SecondPageActivity extends AppCompatActivity implements BaseSliderV
     private static final int REQUEST_IMAGE_CROP = 3;
     private String uriImage;
 
+
     private Uri mImageCaptureUri;
     Bitmap photo;
 
@@ -117,6 +118,8 @@ public class SecondPageActivity extends AppCompatActivity implements BaseSliderV
         setContentView(R.layout.activity_second_page);
         mDemoSlider = (SliderLayout) findViewById(R.id.slider);
 
+
+
         ImageView imgToolBack = (ImageView)findViewById(R.id.img_tool_back);
         imgToolBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,8 +133,9 @@ public class SecondPageActivity extends AppCompatActivity implements BaseSliderV
         Intent it = getIntent();
         double latitude = it.getExtras().getDouble("Latitude");
         double longitude = it.getExtras().getDouble("Longitude");
+        String mGPSName = it.getExtras().getString("GPSName");
 
-        mapInit(latitude, longitude);
+        mapInit(latitude, longitude, mGPSName);
 
         setupSlider();  // 이미지 슬라이드를 불러옵니다.
 
@@ -145,8 +149,8 @@ public class SecondPageActivity extends AppCompatActivity implements BaseSliderV
             }
         });
 
-        ImageView imgMoreBuilding = (ImageView) findViewById(R.id.btnMoreBuilding);
-        imgMoreBuilding.setOnClickListener(new View.OnClickListener() {
+        LinearLayout liMoreBuilding = (LinearLayout)findViewById(R.id.linearMoreBuilding);
+        liMoreBuilding.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent it = new Intent(getApplication(), GirdViewActivity.class);
@@ -154,7 +158,7 @@ public class SecondPageActivity extends AppCompatActivity implements BaseSliderV
             }
         });
 
-        final RelativeLayout reMapShow = (RelativeLayout)findViewById(R.id.relativeMapShow);
+        final RelativeLayout reMapShow = (RelativeLayout)findViewById(R.id .relativeMapShow);
         final RelativeLayout reImgShow = (RelativeLayout)findViewById(R.id.relativeImgShow);
         reImgShow.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -195,8 +199,10 @@ public class SecondPageActivity extends AppCompatActivity implements BaseSliderV
      * @param latitude
      * @param longitude
      */
-    private void mapInit(double latitude, double longitude) {
+    private void mapInit(double latitude, double longitude, String mGPSName) {
         final LatLng latLng = new LatLng(latitude,longitude);
+
+        Log.e("GPSName",mGPSName);
 
         mapSecond = ((MapFragment) getFragmentManager().findFragmentById(R.id.mapSecond)).getMap();
         mapSecond.moveCamera(CameraUpdateFactory.newLatLng(latLng));
@@ -208,8 +214,8 @@ public class SecondPageActivity extends AppCompatActivity implements BaseSliderV
         MarkerOptions options = new MarkerOptions();
         options.position(latLng);
         options.title("위치");
-        options.snippet("위도 : " + latitude + "\n경도 : " + longitude);
-        uriImage = latitude + "_" + longitude;
+        options.snippet(mGPSName);
+        uriImage = mGPSName;
         Log.e("Lat", latitude + "  " + longitude);
 
         mapSecond.addMarker(options).showInfoWindow();
