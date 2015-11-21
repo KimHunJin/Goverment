@@ -17,12 +17,14 @@ import android.support.v4.view.animation.LinearOutSlowInInterpolator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Layout;
+import android.text.util.Linkify;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -38,6 +40,8 @@ import com.hkm.slider.SliderTypes.TextSliderView;
 import com.hkm.slider.TransformerL;
 import com.hkm.slider.Tricks.ViewPagerEx;
 import com.sku.archbiz2015.R;
+import com.sku.archbiz2015.network.NetworkGetImagePath;
+import com.sku.archbiz2015.network.NetworkSetImage;
 import com.sku.archbiz2015.utils.NumZero;
 import com.sku.archbiz2015.utils.DataProvider;
 
@@ -47,8 +51,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
+
+
 
 public class SecondPageActivity extends AppCompatActivity implements BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener {
 
@@ -58,6 +65,9 @@ public class SecondPageActivity extends AppCompatActivity implements BaseSliderV
     private static final int REQUEST_IMAGE_ALBUM = 2;
     private static final int REQUEST_IMAGE_CROP = 3;
     private String uriImage;
+
+    String mGPSName;
+    DataProvider dataProvider;
 
 
     private Uri mImageCaptureUri;
@@ -88,7 +98,7 @@ public class SecondPageActivity extends AppCompatActivity implements BaseSliderV
 
         //and data second. it is a must because you will except the data to be streamed into the pipline.
 //        defaultCompleteSlider(DataProvider.getFileSrcHorizontal());
-        defaultCompleteSlider(DataProvider.getFileSrcHorizontal());
+        defaultCompleteSlider(dataProvider.getFileSrcHorizontal());
     }
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
@@ -118,8 +128,6 @@ public class SecondPageActivity extends AppCompatActivity implements BaseSliderV
         setContentView(R.layout.activity_second_page);
         mDemoSlider = (SliderLayout) findViewById(R.id.slider);
 
-
-
         ImageView imgToolBack = (ImageView)findViewById(R.id.img_tool_back);
         imgToolBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,7 +141,17 @@ public class SecondPageActivity extends AppCompatActivity implements BaseSliderV
         Intent it = getIntent();
         double latitude = it.getExtras().getDouble("Latitude");
         double longitude = it.getExtras().getDouble("Longitude");
-        String mGPSName = it.getExtras().getString("GPSName");
+        mGPSName = it.getExtras().getString("GPSName");
+        ArrayList<String> fileUrlList = (ArrayList<String>) it.getSerializableExtra("fileUrlList");
+
+//        new NetworkGetImagePath(SecondPageActivity.this).execute(mGPSName);
+        dataProvider = new DataProvider();
+        for(int i=0;i< fileUrlList.size();i++) {
+            dataProvider.setHashFile(mGPSName+i,fileUrlList.get(i));
+            Log.e(i+"",fileUrlList.get(i));
+        }
+
+        Log.e("GPSName",mGPSName);
 
         mapInit(latitude, longitude, mGPSName);
 
@@ -189,6 +207,9 @@ public class SecondPageActivity extends AppCompatActivity implements BaseSliderV
         btnValue2.setText((int)(100*Math.random()+1)+"");
         btnValue3.setText((int)(100*Math.random()+1)+"");
         btnValue4.setText((int)(100*Math.random()+1)+"");
+
+        TextView txtBuildLink = (TextView)findViewById(R.id.txtBuildingLink);
+        Linkify.addLinks(txtBuildLink,Linkify.WEB_URLS);
 
     }
 
@@ -414,8 +435,9 @@ public class SecondPageActivity extends AppCompatActivity implements BaseSliderV
                 // // 네트워크로 보낸다.
                 // new NetworkSetImage().execute();
 
+                new NetworkSetImage(SecondPageActivity.this).execute(mGPSName,photo);
                 Toast.makeText(getApplicationContext(),"사진완료",Toast.LENGTH_SHORT).show();
-                break;
+//                break;
             }
         }
     }

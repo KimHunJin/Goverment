@@ -1,26 +1,17 @@
 package com.sku.archbiz2015.activitys;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.sku.archbiz2015.R;
-import com.sku.archbiz2015.network.Network;
+import com.sku.archbiz2015.network.NetworkCheckGPS;
 import com.sku.archbiz2015.utils.GpsInfo;
 
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -47,7 +38,7 @@ public class HomeActivity extends AppCompatActivity {
                 longitude = gps.getLongitude();
 
                 // 현재 위치를 계산
-                new Network(HomeActivity.this).execute(1,latitude,longitude, VALUE);
+                new NetworkCheckGPS(HomeActivity.this).execute(1,latitude,longitude, VALUE);
 
 /*                Intent it = new Intent(getApplication(), SecondPageActivity.class);
                 it.putExtra("Latitude", latitude);

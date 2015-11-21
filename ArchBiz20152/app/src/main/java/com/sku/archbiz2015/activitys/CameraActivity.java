@@ -1,7 +1,6 @@
 package com.sku.archbiz2015.activitys;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.hardware.Camera;
 import android.os.Handler;
@@ -22,9 +21,8 @@ import com.commonsware.cwac.camera.PictureTransaction;
 import com.commonsware.cwac.camera.SimpleCameraHost;
 import com.sku.archbiz2015.R;
 import com.sku.archbiz2015.item.Compass;
-import com.sku.archbiz2015.network.Network;
+import com.sku.archbiz2015.network.NetworkCheckGPS;
 import com.sku.archbiz2015.utils.GpsInfo;
-import com.sku.archbiz2015.utils.SquaredFrameLayout;
 import com.sku.archbiz2015.view.RevealBackgroundView;
 
 import java.io.File;
@@ -66,7 +64,7 @@ public class CameraActivity extends AppCompatActivity implements RevealBackgroun
         btnTakePhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new Network(CameraActivity.this).execute(1,gps.getLatitude(),gps.getLongitude(), VALUE);
+                new NetworkCheckGPS(CameraActivity.this).execute(1,gps.getLatitude(),gps.getLongitude(), VALUE);
 /*                Intent it = new Intent(getApplication(),SecondPageActivity.class);
                 it.putExtra("Latitude", gps.getLatitude());
                 it.putExtra("Longitude", gps.getLongitude());

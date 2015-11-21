@@ -6,10 +6,8 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.sku.archbiz2015.activitys.HomeActivity;
 import com.sku.archbiz2015.activitys.MapSelectActivity;
 import com.sku.archbiz2015.activitys.SecondPageActivity;
-import com.sku.archbiz2015.item.GPSItem;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,7 +24,7 @@ import java.util.ArrayList;
  * Created by HunJin on 2015-11-17.
  * 모든 네트워크 통신을 이곳에서 처리해보려고 합니다.
  */
-public class Network extends AsyncTask<Object, Void, String> {
+    public class NetworkCheckGPS extends AsyncTask<Object, Void, String> {
 
     Context mContext;
     ProgressDialog mProgress;
@@ -44,7 +42,7 @@ public class Network extends AsyncTask<Object, Void, String> {
     String PHtml = "";
     String urlString;
 
-    public Network(Context context) {
+    public NetworkCheckGPS(Context context) {
         mContext = context;
     }
 
@@ -88,9 +86,6 @@ public class Network extends AsyncTask<Object, Void, String> {
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
         Log.e("onPost", "onPostExecute Start");
-        Log.e("paramNumber", paramNumber + "");
-        Log.e("String", s);
-
 
         if (paramNumber == 1) {
             Log.e("String2",s);
@@ -99,18 +94,19 @@ public class Network extends AsyncTask<Object, Void, String> {
                 int cnt = jsonObject.getInt("cnt");
                 Log.e("cnt", cnt+"");
                 if (cnt < 1) {  // 현재 오차에서 검색되는 것이 없다면
-                    mValue += 0.01;
+                    mValue += 0.1;
                     Log.e("urlString", urlString);
                     cancel(true);
                     this.cancel(true);
                     onCancelled();
                     Log.e("cancel",isCancelled()+"");
-                    new Network(mContext).execute(1, mLatitude, mLongitude, mValue);
+                    new NetworkCheckGPS(mContext).execute(1, mLatitude, mLongitude, mValue);
                     mProgress.dismiss();
                 } else if (cnt == 1) {
                     mLatitude = jsonObject.getJSONArray("ret").getJSONObject(0).getDouble("위도");
                     mLongitude = jsonObject.getJSONArray("ret").getJSONObject(0).getDouble("경도");
-                    mGPSName = jsonObject.getJSONArray("ret").getJSONObject(0).getString("도로명_대지_위치");
+//                    mGPSName = jsonObject.getJSONArray("ret").getJSONObject(0).getString("도로명_대지_위치");
+                    mGPSName = jsonObject.getJSONArray("ret").getJSONObject(0).getString("대지_위치");
                     Log.e("GPS", mLatitude + "   " + mLongitude);
                     Intent it = new Intent(mContext, SecondPageActivity.class);
                     it.putExtra("Latitude", mLatitude);
@@ -131,7 +127,8 @@ public class Network extends AsyncTask<Object, Void, String> {
                         JSONObject jsonGPS = jArray.getJSONObject(i);
                         mLatitudeGPS.add(jsonGPS.getDouble("위도"));
                         mLongitudeGPS.add(jsonGPS.getDouble("경도"));
-                        mGPSNameList.add(jsonGPS.getString("도로명_대지_위치"));
+//                        mGPSNameList.add(jsonGPS.getString("도로명_대지_위치"));
+                        mGPSNameList.add(jsonGPS.getString("대지_위치"));
 /*                        GPSItem gpsItem = new GPSItem();
                         gpsItem.setmLatitude(jsonGPS.getDouble("위도"));
                         gpsItem.setmLongitude(jsonGPS.getDouble("경도"));
@@ -145,6 +142,7 @@ public class Network extends AsyncTask<Object, Void, String> {
                     it.putExtra("GPSName",mGPSNameList);
                     mContext.startActivity(it);
                     mProgress.dismiss();
+
                 }
             } catch (JSONException je) {
                 je.printStackTrace();
