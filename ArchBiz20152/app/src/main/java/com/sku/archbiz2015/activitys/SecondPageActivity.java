@@ -21,6 +21,7 @@ import android.text.util.Linkify;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -44,6 +45,8 @@ import com.sku.archbiz2015.network.NetworkGetImagePath;
 import com.sku.archbiz2015.network.NetworkSetImage;
 import com.sku.archbiz2015.utils.NumZero;
 import com.sku.archbiz2015.utils.DataProvider;
+
+import org.w3c.dom.Text;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -147,11 +150,11 @@ public class SecondPageActivity extends AppCompatActivity implements BaseSliderV
 //        new NetworkGetImagePath(SecondPageActivity.this).execute(mGPSName);
         dataProvider = new DataProvider();
         for(int i=0;i< fileUrlList.size();i++) {
-            dataProvider.setHashFile(mGPSName+i,fileUrlList.get(i));
-            Log.e(i+"",fileUrlList.get(i));
+            dataProvider.setHashFile((i+1)+") " +mGPSName,fileUrlList.get(i));
+            Log.e(i + "", fileUrlList.get(i));
         }
 
-        Log.e("GPSName",mGPSName);
+        Log.e("GPSName", mGPSName);
 
         mapInit(latitude, longitude, mGPSName);
 
@@ -171,7 +174,7 @@ public class SecondPageActivity extends AppCompatActivity implements BaseSliderV
         liMoreBuilding.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent it = new Intent(getApplication(), GirdViewActivity.class);
+                Intent it = new Intent(getApplication(), BuildingDetailPage.class);
                 startActivity(it);
             }
         });
@@ -198,6 +201,10 @@ public class SecondPageActivity extends AppCompatActivity implements BaseSliderV
             }
         });
 
+        EditText edtToolSearch = (EditText)findViewById(R.id.edt_tool_search);
+        edtToolSearch.setHint(mGPSName);
+        edtToolSearch.setEnabled(false);
+
         Button btnValue1 = (Button)findViewById(R.id.btnValue1);
         Button btnValue2 = (Button)findViewById(R.id.btnValue2);
         Button btnValue3 = (Button)findViewById(R.id.btnValue3);
@@ -209,7 +216,12 @@ public class SecondPageActivity extends AppCompatActivity implements BaseSliderV
         btnValue4.setText((int)(100*Math.random()+1)+"");
 
         TextView txtBuildLink = (TextView)findViewById(R.id.txtBuildingLink);
+        TextView txtInvestLink = (TextView)findViewById(R.id.txtInvestLink);
+        TextView txtAdLink = (TextView)findViewById(R.id.txtAdLink);
+
         Linkify.addLinks(txtBuildLink,Linkify.WEB_URLS);
+        Linkify.addLinks(txtInvestLink,Linkify.WEB_URLS);
+        Linkify.addLinks(txtAdLink,Linkify.WEB_URLS);
 
     }
 

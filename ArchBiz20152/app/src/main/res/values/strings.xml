@@ -16,4 +16,5 @@
 
     <string name="compass_dial">Compass Dial</string>
     <string name="compass_hands">Compass Hands</string>
+    <string name="title_activity_building_detail_page">BuildingDetailPage</string>
 </resources>

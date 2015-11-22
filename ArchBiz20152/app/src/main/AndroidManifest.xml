@@ -23,12 +23,12 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/logo"
         android:label="@string/app_name"
         android:theme="@style/ToolBarTheme" >
         <activity
             android:name=".activitys.HomeActivity"
-            android:label="@string/title_activity_home" >
+            android:label="쩜별 빌딩 가치평가 서비스" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -45,8 +45,7 @@
             android:name=".activitys.MapSensorActivity"
             android:label="Main" >
         </activity>
-
-        <activity android:name=".activitys.MapSelectActivity"/>
+        <activity android:name=".activitys.MapSelectActivity" />
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
@@ -59,7 +58,10 @@
             android:name=".activitys.CameraActivity"
             android:label="@string/title_activity_camera" >
         </activity>
-
+        <activity
+            android:name=".activitys.BuildingDetailPage"
+            android:label="@string/title_activity_building_detail_page" >
+        </activity>
     </application>
 
 </manifest>

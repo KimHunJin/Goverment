@@ -4,11 +4,14 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.sku.archbiz2015.R;
 import com.sku.archbiz2015.network.NetworkCheckGPS;
+import com.sku.archbiz2015.network.NetworkSelectGPS;
 import com.sku.archbiz2015.utils.GpsInfo;
 
 import java.util.ArrayList;
@@ -19,6 +22,7 @@ public class HomeActivity extends AppCompatActivity {
     private static final double VALUE = 0.0001;
     double latitude, longitude;
     ArrayList<Double> arrayList;
+    String loadName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +33,17 @@ public class HomeActivity extends AppCompatActivity {
         if(!gps.isGetLocation()) {
             gps.showSettingsAlert();
         }
+
+        final EditText edtToolSearch = (EditText)findViewById(R.id.edt_tool_search);
+
+        ImageView imgToolSearch = (ImageView)findViewById(R.id.img_tool_search);
+        imgToolSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadName = edtToolSearch.getText().toString().trim();
+                new NetworkSelectGPS(HomeActivity.this).execute(loadName);
+            }
+        });
 
         LinearLayout liNow = (LinearLayout)findViewById(R.id.linearNow);
         liNow.setOnClickListener(new View.OnClickListener() {

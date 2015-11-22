@@ -14,6 +14,7 @@ import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -28,6 +29,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.sku.archbiz2015.R;
 import com.sku.archbiz2015.item.SensorItem;
+import com.sku.archbiz2015.network.NetworkSelectGPS;
 import com.sku.archbiz2015.utils.GpsInfo;
 
 import java.io.IOException;
@@ -42,6 +44,8 @@ public class MapSensorActivity extends FragmentActivity implements GoogleMap.OnM
     long startTime;
     double currAzimuth;
 
+    String loadName;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -51,6 +55,17 @@ public class MapSensorActivity extends FragmentActivity implements GoogleMap.OnM
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+
+        final EditText edtToolSearch = (EditText)findViewById(R.id.edt_tool_search);
+
+        ImageView imgToolSearch = (ImageView)findViewById(R.id.img_tool_search);
+        imgToolSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadName = edtToolSearch.getText().toString().trim();
+                new NetworkSelectGPS(MapSensorActivity.this).execute(loadName);
             }
         });
 

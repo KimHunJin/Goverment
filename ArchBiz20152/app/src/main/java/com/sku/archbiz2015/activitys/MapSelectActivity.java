@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -21,6 +22,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.sku.archbiz2015.R;
 import com.sku.archbiz2015.item.GPSItem;
 import com.sku.archbiz2015.network.NetworkGetImagePath;
+import com.sku.archbiz2015.network.NetworkSelectGPS;
 
 import org.w3c.dom.Text;
 
@@ -37,6 +39,7 @@ import java.util.ArrayList;
  */
 public class MapSelectActivity extends AppCompatActivity {
     GoogleMap map;  //구글맵
+    String loadName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +51,25 @@ public class MapSelectActivity extends AppCompatActivity {
         ArrayList<Double> mLatitude = (ArrayList<Double>) it.getSerializableExtra("Latitude");
         ArrayList<Double> mLongitude = (ArrayList<Double>) it.getSerializableExtra("Longitude");
         ArrayList<String> mGPSName = (ArrayList<String>) it.getSerializableExtra("GPSName");
+
+        ImageView imgToolBack = (ImageView)findViewById(R.id.img_tool_back);
+        imgToolBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        final EditText edtToolSearch = (EditText)findViewById(R.id.edt_tool_search);
+
+        ImageView imgToolSearch = (ImageView)findViewById(R.id.img_tool_search);
+        imgToolSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadName = edtToolSearch.getText().toString().trim();
+                new NetworkSelectGPS(MapSelectActivity.this).execute(loadName);
+            }
+        });
 
         MapsInitializer.initialize(getApplicationContext());
         init();

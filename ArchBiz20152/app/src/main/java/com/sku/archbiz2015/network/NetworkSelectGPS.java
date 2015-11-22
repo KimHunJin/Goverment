@@ -5,10 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.sku.archbiz2015.activitys.SecondPageActivity;
-import com.sku.archbiz2015.utils.DataProvider;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -22,13 +21,11 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.Objects;
 
 /**
- * Created by HunJin on 2015-11-21.
+ * Created by HunJin on 2015-11-22.
  */
-public class NetworkGetImagePath extends AsyncTask<Object, Void, String> {
-
+public class NetworkSelectGPS extends AsyncTask<Object, Void, String> {
     Context mContext;
     ProgressDialog mProgress;
     JSONObject jsonObject = null;
@@ -45,7 +42,7 @@ public class NetworkGetImagePath extends AsyncTask<Object, Void, String> {
 
     ArrayList<String> fileUrlList;
 
-    public NetworkGetImagePath(Context context) {
+    public NetworkSelectGPS(Context context) {
         mContext = context;
     }
 
@@ -62,10 +59,8 @@ public class NetworkGetImagePath extends AsyncTask<Object, Void, String> {
         loadName = (String)params[0];
         loadName = loadName.trim();
 
-        latitude = (Double)params[1];
-        longitude = (Double)params[2];
-
-        urlString = "http://54.149.51.26/goverment/getImageLoad.php?loadName="+loadName;
+        Log.e("NetworkSelect","startDoInBackground");
+        urlString = "http://54.149.51.26/goverment/searchGPS.php?loadName="+loadName;
         htmlRead(urlString);
 
         return address;
@@ -74,36 +69,21 @@ public class NetworkGetImagePath extends AsyncTask<Object, Void, String> {
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
+        Log.e("onPostExecute","StartOnPostExecute");
         try {
             jsonObject = new JSONObject(s);
             int cnt = jsonObject.getInt("cnt");
-            Log.e("cnt",cnt+"");
+            Log.e("cnt", cnt + "");
             fileUrlList = new ArrayList<>();
             if(cnt < 1) {
 //                DataProvider.setHashFile("DefaultImage","https://s3-us-west-2.amazonaws.com/valueupmos/1");
-                fileUrlList.add("https://s3-us-west-2.amazonaws.com/valueupmos/11.jpg");
+                Toast.makeText(mContext.getApplicationContext(),"주소를 찾지 못했습니다.",Toast.LENGTH_SHORT).show();
             } else {
                 JSONArray jsonArray = jsonObject.getJSONArray("ret");
-
-                for(int i=0;i<cnt;i++) {
-                    String mFIleName = jsonArray.getJSONObject(i).getString("파일_명");
-                    mFIleName = mFIleName.trim();
-                    try {
-                        mFIleName = URLEncoder.encode(mFIleName,"utf-8");
-                        fileUrlList.add("https://s3-us-west-2.amazonaws.com/valueupmos/"+mFIleName);
-                        Log.e("파일명", mFIleName);
-                    } catch(UnsupportedEncodingException ue) {
-                        ue.printStackTrace();
-                    }
-                }
+                Double latitude = jsonArray.getJSONObject(0).getDouble("위도");
+                Double longitude = jsonArray.getJSONObject(0).getDouble("경도");
+                new NetworkGetImagePath(mContext).execute(loadName,latitude,longitude);
             }
-
-            Intent it = new Intent(mContext, SecondPageActivity.class);
-            it.putExtra("Latitude", latitude);
-            it.putExtra("Longitude",longitude);
-            it.putExtra("GPSName",loadName);
-            it.putExtra("fileUrlList", fileUrlList);
-            mContext.startActivity(it);
 //            it.putExtra("dataProvider",dataProvider);
 
             mProgress.dismiss();

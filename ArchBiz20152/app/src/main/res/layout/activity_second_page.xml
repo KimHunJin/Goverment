@@ -358,12 +358,12 @@
                         android:padding="16dp">
 
 
-                        <ImageView
+                        <com.sku.archbiz2015.utils.RoundImageView
                             android:id="@+id/investImage1"
                             android:layout_width="88dp"
                             android:layout_height="88dp"
                             android:layout_marginRight="16dp"
-                            android:background="#eeeeee" />
+                            android:src="@drawable/pizza" />
 
                         <EditText
                             android:id="@+id/investText1"
@@ -375,6 +375,7 @@
                             android:gravity="top"
                             android:lines="3"
                             android:padding="8dp"
+                            android:text="Pizza"
                             android:textColor="#333333"
                             android:textSize="14sp" />
                     </LinearLayout>
@@ -396,12 +397,12 @@
                         android:layout_height="wrap_content"
                         android:padding="16dp">
 
-                        <ImageView
+                        <com.sku.archbiz2015.utils.RoundImageView
                             android:id="@+id/investImage2"
                             android:layout_width="88dp"
                             android:layout_height="88dp"
                             android:layout_marginRight="16dp"
-                            android:background="#eeeeee" />
+                            android:src="@drawable/chicken" />
 
                         <EditText
                             android:id="@+id/investText2"
@@ -413,9 +414,11 @@
                             android:gravity="top"
                             android:lines="3"
                             android:padding="8dp"
+                            android:text="Chicken"
                             android:textColor="#333333"
                             android:textSize="14sp" />
                     </LinearLayout>
+
 
                     <View
                         android:layout_width="match_parent"
@@ -443,9 +446,6 @@
 
                     </LinearLayout>
 
-
-
-
                 </LinearLayout>
 
             </android.support.v7.widget.CardView>
@@ -470,22 +470,23 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <ImageView
+                        <com.sku.archbiz2015.utils.RoundImageView
                             android:layout_width="72dp"
                             android:layout_height="72dp"
-                            android:background="#eeeeee" />
+                            android:background="#eeeeee"
+                            android:src="@drawable/pizza" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
                             android:orientation="vertical">
 
                             <TextView
-
                                 android:id="@+id/txtInvestSubject"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="제목"
+                                android:text="미스터피자"
                                 android:textColor="#000000"
                                 android:textSize="24dp" />
 
@@ -493,11 +494,12 @@
                                 android:id="@+id/txtInvestLink"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="링크"
+                                android:text="http://www.mrpizza.co.kr/"
                                 android:textColor="#00a3ff"
                                 android:textSize="16dp" />
 
                         </LinearLayout>
+
                     </LinearLayout>
                 </LinearLayout>
 
@@ -531,12 +533,12 @@
                         android:padding="16dp">
 
 
-                        <ImageView
+                        <com.sku.archbiz2015.utils.RoundImageView
                             android:id="@+id/adImage1"
                             android:layout_width="88dp"
                             android:layout_height="88dp"
                             android:layout_marginRight="16dp"
-                            android:background="#eeeeee" />
+                            android:src="@drawable/lice" />
 
                         <EditText
                             android:id="@+id/adText1"
@@ -548,6 +550,7 @@
                             android:gravity="top"
                             android:lines="3"
                             android:padding="8dp"
+                            android:text="한식"
                             android:textColor="#333333"
                             android:textSize="14sp" />
                     </LinearLayout>
@@ -569,12 +572,12 @@
                         android:layout_height="wrap_content"
                         android:padding="16dp">
 
-                        <ImageView
+                        <com.sku.archbiz2015.utils.RoundImageView
                             android:id="@+id/adImage2"
                             android:layout_width="88dp"
                             android:layout_height="88dp"
                             android:layout_marginRight="16dp"
-                            android:background="#eeeeee" />
+                            android:src="@drawable/japaness" />
 
                         <EditText
                             android:id="@+id/adText2"
@@ -586,9 +589,11 @@
                             android:gravity="top"
                             android:lines="3"
                             android:padding="8dp"
+                            android:text="일식"
                             android:textColor="#333333"
                             android:textSize="14sp" />
                     </LinearLayout>
+
 
                     <View
                         android:layout_width="match_parent"
@@ -640,21 +645,23 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <ImageView
+                        <com.sku.archbiz2015.utils.RoundImageView
                             android:layout_width="72dp"
                             android:layout_height="72dp"
-                            android:background="#eeeeee" />
+                            android:background="#eeeeee"
+                            android:src="@drawable/lice" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
                             android:orientation="vertical">
 
                             <TextView
                                 android:id="@+id/txtAdSubject"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="제목"
+                                android:text="한국의집"
                                 android:textColor="#000000"
                                 android:textSize="24dp" />
 
@@ -662,7 +669,7 @@
                                 android:id="@+id/txtAdLink"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="링크"
+                                android:text="http://www.koreahouse.or.kr/main/?skin=food01.html"
                                 android:textColor="#00a3ff"
                                 android:textSize="16dp" />
 

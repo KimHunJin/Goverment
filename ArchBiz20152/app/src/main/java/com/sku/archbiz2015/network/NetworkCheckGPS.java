@@ -94,7 +94,7 @@ import java.util.ArrayList;
                 int cnt = jsonObject.getInt("cnt");
                 Log.e("cnt", cnt+"");
                 if (cnt < 1) {  // 현재 오차에서 검색되는 것이 없다면
-                    mValue += 0.1;
+                    mValue += 0.17;
                     Log.e("urlString", urlString);
                     cancel(true);
                     this.cancel(true);
